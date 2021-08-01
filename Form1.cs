@@ -643,6 +643,191 @@ namespace Project
             {
                 // Empty as no actions needed
             }  
-        }       
+        }
+        
+        
+        // ----------------------------------------Functions for toolTip1 -----------------------------------------------------------
+
+        // Show guiding text for House Number
+        private void txtHouseNumber_MouseHover(object sender, EventArgs e)
+        {
+            toolTip1.Show("Enter the House number", txtHouseNumber);
+        }
+
+
+        // Show guiding text for Street name
+        private void txtStreet_MouseHover(object sender, EventArgs e)
+        {
+            toolTip1.Show("Enter the name of the Street", txtHouseNumber);
+        }
+
+
+        // Show guiding text for Area
+        private void comboBoxArea_MouseHover(object sender, EventArgs e)
+        {
+            toolTip1.Show("Choose the property's Area", comboBoxArea);
+        }
+
+
+        // Show guiding text for District
+        private void comboBoxDistrict_MouseHover(object sender, EventArgs e)
+        {
+            toolTip1.Show("Choose the property's District", comboBoxDistrict);
+        }
+
+
+        // Show guiding text for House Type
+        private void comboBoxType_MouseHover(object sender, EventArgs e)
+        {
+            toolTip1.Show("Choose the property's Type", comboBoxType);
+        }
+
+
+        // Show guiding text for Heating
+        private void comboBoxHeating_MouseHover(object sender, EventArgs e)
+        {
+            toolTip1.Show("Choose the property's Heating", comboBoxHeating);
+        }
+
+
+        // Show guiding text for Room
+        private void comboBoxRoom_MouseHover(object sender, EventArgs e)
+        {
+            toolTip1.Show("Choose the number of Rooms", comboBoxRoom);
+        }
+
+
+        // Show guiding text for Ber
+        private void comboBoxBer_MouseHover(object sender, EventArgs e)
+        {
+            toolTip1.Show("Choose the property's Ber rating", comboBoxBer);
+        }
+
+
+        // Show guiding text for Facilities
+        private void groupBox1_MouseHover(object sender, EventArgs e)
+        {
+            toolTip1.Show("Select the property's Facilities", groupBox1);
+        }
+
+
+        // Show guiding text for Size
+        private void txtSize_MouseHover(object sender, EventArgs e)
+        {
+            toolTip1.Show("Enter the Size of the property", txtSize);
+        }
+
+
+        // Show guiding text for Price
+        private void txtPrice_MouseHover(object sender, EventArgs e)
+        {
+            toolTip1.Show("Enter the Price of the property", txtPrice);
+        }
+
+
+        // Show guiding text Add button
+        private void btnAdd_MouseHover(object sender, EventArgs e)
+        {
+            toolTip1.Show("Add new record", btnAdd);
+        }
+
+
+        // Show guiding text for Update button
+        private void btnUpdate_MouseHover(object sender, EventArgs e)
+        {
+            toolTip1.Show("Update edited record", btnUpdate);
+        }
+
+
+        // Show guiding text Delete button
+        private void btnDelete_MouseHover(object sender, EventArgs e)
+        {
+            toolTip1.Show("Delete current record", btnDelete);
+        }
+
+
+        // Show guiding text for Clear Records button
+        private void btnClearRecord_MouseHover(object sender, EventArgs e)
+        {
+            toolTip1.Show("Clear all records", btnClearRecords);
+        }
+
+
+        // Show guiding text for Search button
+        private void btnSearch_MouseHover(object sender, EventArgs e)
+        {
+            toolTip1.Show("Search Records", btnSearch);
+        }
+
+
+        // Show guiding text for Clear button
+        private void btnClear_MouseHover(object sender, EventArgs e)
+        {
+            toolTip1.Show("Clear current record", btnClear);
+        }
+
+
+        // Show guiding text for Cancel button
+        private void btnCancel_MouseHover(object sender, EventArgs e)
+        {
+            toolTip1.Show("Cancel modifications on current record", btnCancel);
+        }
+
+
+        // Show guiding text for Exit button
+        private void btnExit_MouseHover(object sender, EventArgs e)
+        {
+            toolTip1.Show("Exit application", btnExit);
+        }
+
+
+        // Show guiding text for First button
+        private void btnFirst_MouseHover(object sender, EventArgs e)
+        {
+            toolTip1.Show("First record", btnFirst);
+        }
+
+
+        // Show guiding text for Previous button
+        private void btnPrevious_MouseHover(object sender, EventArgs e)
+        {
+            toolTip1.Show("Previous record", btnPrevious);
+        }
+
+
+        // Show guiding text for Index button
+        private void txtIndex_MouseHover(object sender, EventArgs e)
+        {
+            toolTip1.Show("Current index", txtIndex);
+        }
+
+
+        // Show guiding text for Next button
+        private void btnNext_MouseHover(object sender, EventArgs e)
+        {
+            toolTip1.Show("Next record", btnNext);
+        }
+
+
+        // Show guiding text for Last button
+        private void btnLast_MouseHover(object sender, EventArgs e)
+        {
+            toolTip1.Show("Last record", btnLast);
+        }
+
+
+        // Radio button to activate toolTip1
+        private void radioButton1_CheckedChanged(object sender, EventArgs e)
+        {
+            toolTip1.Active = true;
+        }
+
+
+        // Radio button to deactivate toolTip1
+        private void radioButton2_CheckedChanged(object sender, EventArgs e)
+        {
+            toolTip1.Active = false;
+        }
     }
+    // author: https://github.com/GaborIreHun
 }
