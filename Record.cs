@@ -47,4 +47,5 @@ namespace Project
             get { return facilitiesSettings; }
         }        
     }
+    // author: https://github.com/GaborIreHun
 }
