@@ -5,7 +5,6 @@ using System.Windows.Forms;
 
 namespace Project
 {
-    //s[Serializable]
     public partial class Form2 : Form
     {
         // Creating datatable for the source of datagridview
@@ -31,45 +30,56 @@ namespace Project
             comboBoxMax1.SelectedIndex = 0;
             comboBoxMin.SelectedIndex = 0;
             comboBoxMax.SelectedIndex = 0;
+
+            // Deactivating toolTip at Form loading
+            toolTip1.Active = false;
         }
 
 
         // Method to convert CSV to datatable
         private void BindData(string filePath)
         {
-            // Create local datatable to store info
-            DataTable dt = new DataTable();
-            // Reading given file on given path
-            string[] lines = System.IO.File.ReadAllLines(filePath);
-            if (lines.Length > 0)
+            try
             {
-                // First line to create header
-                string firstLine = lines[0];
-                string[] headerLabels = firstLine.Split(',');
-                foreach (string headerWord in headerLabels)
+                // Create local datatable to store info
+                DataTable dt = new DataTable();
+                // Reading given file on given path
+                string[] lines = System.IO.File.ReadAllLines(filePath);
+                if (lines.Length > 0)
                 {
-                    dt.Columns.Add(new DataColumn(headerWord));
-                }
-                // For Data
-                for (int i = 1; i < lines.Length; i++)
-                {
-                    string[] dataWords = lines[i].Split(',');
-                    DataRow dr = dt.NewRow();
-                    int columnIndex = 0;
+                    // First line to create header
+                    string firstLine = lines[0];
+                    string[] headerLabels = firstLine.Split(',');
                     foreach (string headerWord in headerLabels)
                     {
-                        dr[headerWord] = dataWords[columnIndex++];
+                        dt.Columns.Add(new DataColumn(headerWord));
                     }
-                    dt.Rows.Add(dr);
+                    // For Data
+                    for (int i = 1; i < lines.Length; i++)
+                    {
+                        string[] dataWords = lines[i].Split(',');
+                        DataRow dr = dt.NewRow();
+                        int columnIndex = 0;
+                        foreach (string headerWord in headerLabels)
+                        {
+                            dr[headerWord] = dataWords[columnIndex++];
+                        }
+                        dt.Rows.Add(dr);
+                    }
                 }
+                // If there are any rows in the created datatable use it as the source of datagridview
+                if (dt.Rows.Count > 0)
+                {
+                    dataGridView1.DataSource = dt;
+                }
+
+                dt2 = dt;
             }
-            // If there are any rows in the created datatable use it as the source of datagridview
-            if (dt.Rows.Count > 0)
+            catch (Exception ex)
             {
-                dataGridView1.DataSource = dt;
+                MessageBox.Show(ex.Message);
             }
 
-            dt2 = dt;
         }
 
 
@@ -86,13 +96,20 @@ namespace Project
         // Creating function for clicking on map button
         private void btnMap_Click(object sender, EventArgs e)
         {
-            // Resizing picturebox to fill form2
-            PictureBox ScreenPbx = pictureBox1;
-            ScreenPbx.Dock = DockStyle.Fill;
-            ScreenPbx.SizeMode = PictureBoxSizeMode.StretchImage;
-            
-            // Showing map
-            pictureBox1.Visible = true;
+            try
+            {
+                // Resizing picturebox to fill form2
+                PictureBox ScreenPbx = pictureBox1;
+                ScreenPbx.Dock = DockStyle.Fill;
+                ScreenPbx.SizeMode = PictureBoxSizeMode.StretchImage;
+
+                // Showing map
+                pictureBox1.Visible = true;
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.Message);
+            }
         }
 
         // Creating function for clicking on picturebox
@@ -120,7 +137,7 @@ namespace Project
             string searchParking = comboBoxParking.Text;
             string searchGarden = comboBoxGarden.Text;
             string searchAlarm = comboBoxAlarm.Text;
-            string searchBroadband = comboBoxBroadand.Text;
+            string searchBroadband = comboBoxBroadband.Text;
             string searchAircondition = comboBoxAircondition.Text;
             string searchSolarPanel = comboBoxSolarPanel.Text;
             string searchProximityArea = comboBoxProximity.Text;
@@ -172,7 +189,6 @@ namespace Project
             }
             catch (Exception ex)
             {
-
                 MessageBox.Show(ex.Message);
             }
         }
@@ -188,45 +204,211 @@ namespace Project
         // Clear criteria button functions
         private void btnClearAll_Click(object sender, EventArgs e)
         {
-            // Setting all facilities comboboxes to null selection
-            foreach (Control ctrl in groupBox11.Controls)
+            try
             {
-                if (ctrl is ComboBox)
+                // Setting all facilities comboboxes to null selection
+                foreach (Control ctrl in groupBox11.Controls)
                 {
-                    ComboBox comboBox = (ComboBox)ctrl;
-                    comboBox.SelectedIndex = -1;
+                    if (ctrl is ComboBox)
+                    {
+                        ComboBox comboBox = (ComboBox)ctrl;
+                        comboBox.SelectedIndex = -1;
+                    }
                 }
-            }
 
-            // Setting all size comboboxes to default value which is the first in the collection
-            foreach (Control item in groupBox2.Controls)
-            {
-                if (item is ComboBox)
+                // Setting all size comboboxes to default value which is the first in the collection
+                foreach (Control item in groupBox2.Controls)
                 {
-                    ComboBox comboBox = (ComboBox)item;
-                    comboBox.SelectedIndex = default;
+                    if (item is ComboBox)
+                    {
+                        ComboBox comboBox = (ComboBox)item;
+                        comboBox.SelectedIndex = default;
+                    }
                 }
-            }
 
-            // Setting all price comboboxes to default value which is the first in the collection
-            foreach (Control item in groupBox3.Controls)
-            {
-                if (item is ComboBox)
+                // Setting all price comboboxes to default value which is the first in the collection
+                foreach (Control item in groupBox3.Controls)
                 {
-                    ComboBox comboBox = (ComboBox)item;
-                    comboBox.SelectedIndex = default;
+                    if (item is ComboBox)
+                    {
+                        ComboBox comboBox = (ComboBox)item;
+                        comboBox.SelectedIndex = default;
+                    }
                 }
-            }
 
-            // Setting all other comboboxes to null selection
-            foreach (Control item in Controls)
-            {
-                if (item is ComboBox)
+                // Setting all other comboboxes to null selection
+                foreach (Control item in Controls)
                 {
-                    ComboBox comboBox = (ComboBox)item;
-                    comboBox.SelectedIndex = -1;
+                    if (item is ComboBox)
+                    {
+                        ComboBox comboBox = (ComboBox)item;
+                        comboBox.SelectedIndex = -1;
+                    }
                 }
             }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.Message);
+            }
+        }
+
+        // ------------------------------------------- Functions for toolTip1 --------------------------------------------------------
+
+        // Radio button to activate toolTip1
+        private void radioButtonOn_CheckedChanged(object sender, EventArgs e)
+        {
+            toolTip1.Active = true;
+        }
+
+        // Radio button to deactivate toolTip1
+        private void radioButtonOff_CheckedChanged(object sender, EventArgs e)
+        {
+            toolTip1.Active = false;
+        }
+
+        // Show guiding text for Area
+        private void comboBoxArea1_MouseHover(object sender, EventArgs e)
+        {
+            toolTip1.Show("Choose the property's Area", comboBoxArea1);
+        }
+
+        // Show guiding text for District
+        private void comboBoxDistrict1_MouseHover(object sender, EventArgs e)
+        {
+            toolTip1.Show("Choose the property's District", comboBoxDistrict1);
+        }
+
+        // Show guiding text for Type
+        private void comboBoxType1_MouseHover(object sender, EventArgs e)
+        {
+            toolTip1.Show("Choose the property's Type", comboBoxType1);
+        }
+
+        // Show guiding text for Heating
+        private void comboBoxHeating1_MouseHover(object sender, EventArgs e)
+        {
+            toolTip1.Show("Choose the property's Heating", comboBoxHeating1);
+        }
+
+        // Show guiding text for Room
+        private void comboBoxRoom1_MouseHover(object sender, EventArgs e)
+        {
+            toolTip1.Show("Choose the number of Rooms", comboBoxRoom1);
+        }
+
+        // Show guiding text for BER
+        private void comboBoxBer1_MouseHover(object sender, EventArgs e)
+        {
+            toolTip1.Show("Choose the property's Ber rating", comboBoxBer1);
+        }
+
+        // Show guiding text for Minimum Size
+        private void comboBoxMin_MouseHover(object sender, EventArgs e)
+        {
+            toolTip1.Show("Choose the Minimum Size", comboBoxMin);
+        }
+
+        // Show guiding text for Maximum Size
+        private void comboBoxMax_MouseHover(object sender, EventArgs e)
+        {
+            toolTip1.Show("Choose the Maximum Size", comboBoxMax);
+        }
+
+        // Show guiding text for Minimum Price
+        private void comboBoxMin1_MouseHover(object sender, EventArgs e)
+        {
+            toolTip1.Show("Choose the Minimum Price", comboBoxMin1);
+        }
+
+        // Show guiding text for Maximum Price
+        private void comboBoxMax1_MouseHover(object sender, EventArgs e)
+        {
+            toolTip1.Show("Choose the Maximum Price", comboBoxMax1);
+        }
+
+        // Show guiding text for Map button
+        private void btnMap_MouseHover(object sender, EventArgs e)
+        {
+            toolTip1.Show("Show map", btnMap);
+        }
+
+        // Show guiding text for Parking
+        private void comboBoxParking_MouseHover(object sender, EventArgs e)
+        {
+            toolTip1.Show("Choose Parking preference", comboBoxParking);
+        }
+
+        // Show guiding text for Alarm
+        private void comboBoxAlarm_MouseHover(object sender, EventArgs e)
+        {
+            toolTip1.Show("Choose Alarm preference", comboBoxAlarm);
+        }
+
+        // Show guiding text for Aircondition
+        private void comboBoxAircondition_MouseHover(object sender, EventArgs e)
+        {
+            toolTip1.Show("Choose Aircondition preference", comboBoxAircondition);
+        }
+
+        // Show guiding text for Proximity Area
+        private void comboBoxProximity_MouseHover(object sender, EventArgs e)
+        {
+            toolTip1.Show("Choose Proximity Area preference", comboBoxProximity);
+        }
+
+        // Show guiding text for Clear Criteria
+        private void btnClearAll_MouseHover(object sender, EventArgs e)
+        {
+            toolTip1.Show("Clear all fields", btnClearAll);
+        }
+
+        // Show guiding text for Back button
+        private void btnBack1_MouseHover(object sender, EventArgs e)
+        {
+            toolTip1.Show("Go back to the first page", btnBack1);
+        }
+
+        // Show guiding text for Garden
+        private void comboBoxGarden_MouseHover(object sender, EventArgs e)
+        {
+            toolTip1.Show("Choose Garden preference", comboBoxGarden);
+        }
+
+        // Show guiding text for Broadband
+        private void comboBoxBroadband_MouseHover(object sender, EventArgs e)
+        {
+            toolTip1.Show("Choose Broadband preference", comboBoxBroadband);
+        }
+
+        // Show guiding text for Solar Panel
+        private void comboBoxSolarPanel_MouseHover(object sender, EventArgs e)
+        {
+            toolTip1.Show("Choose Solar Panel preference", comboBoxSolarPanel);
+        }
+
+        // Show guiding text for Wheelchair Access
+        private void comboBoxWheelchair_MouseHover(object sender, EventArgs e)
+        {
+            toolTip1.Show("Choose Wheelchair Access preference", comboBoxWheelchair);
+        }
+
+        // Show guiding text for Refresh button
+        private void btnRefresh_MouseHover(object sender, EventArgs e)
+        {
+            toolTip1.Show("Refresh List", btnRefresh);
+        }
+
+        // Show guiding text for Search button
+        private void btnSearching_MouseHover(object sender, EventArgs e)
+        {
+            toolTip1.Show("Search Collection", btnSearching);
+        }
+
+
+        // Function for help button
+        private void btnHelp_Click(object sender, EventArgs e)
+        {
+            System.Diagnostics.Process.Start(@"Property Listing Documentation.html");
         }
     }
     // author: https://github.com/GaborIreHun
