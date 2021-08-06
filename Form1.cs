@@ -46,7 +46,7 @@ namespace Project
         }
         
                 
-        // 
+        // Loading Form1
         private void Form1_Load(object sender, EventArgs e)
         {
             // Calling StartTimer method to display clock
@@ -55,10 +55,34 @@ namespace Project
             // Deactivating toolTip at Form loading
             toolTip1.Active = false;
 
+            // Calling the SelectLoadRecords method to load the appropriate records
+            SelectLoadRecords();
+
+            // Sorting Area list in aplhabetical order
+            comboBoxArea.Sorted = true;
+
+            // Calling DisplayRecord to display the records
+            DisplayRecord(0);
+
+        }
+
+
+        // Method for loading initial records
+        private void SelectLoadRecords()
+        {
+            // Checking if application was run before - if yes, saved values from last state shall be loaded
+            if (File.Exists(@"loadingText.ser") == true)
+                OpenFile(@"loadingText.ser");
+            else
+                CreateRandomRecords();
+        }
+
+        private void CreateRandomRecords()
+        {
             // Creating new random object
             Random rnd = new Random();
 
-            
+
             // Lists for random street names
             string[] streetPart1 = { "Lake", "Church", "Mountain", "Railway", "Oak", "Willow", "Birch", "Elm", "Hazel", "Ashington", "Navan", "Ashfield", "Bedford", "Fitzwilliam", "Sarsfield", "Barry", "Belclare", "Castlewood", "Belgrove" };
             string[] streetPart2 = { "Road", "Park", "Avenue", "Green", "Cresent", "View", "Lane", "Rise", "Court", "Cove", "Street", "Boulevard", "Place", "Square", "Terrace", "Upper", "Lower", "Grove", "Hill", "Terrace" };
@@ -185,15 +209,14 @@ namespace Project
 
                 }
 
-                // Calling DisplayRecord to display the record in an appropriate layout
-                DisplayRecord(0);
+                // saving state for future use
+                SimpleSave();
             }
             catch (Exception ex)
             {
                 MessageBox.Show(ex.Message);
             }
         }
-
 
         // Method to clear all fields
         private void ClearAll()
@@ -342,6 +365,17 @@ namespace Project
             }
         }
 
+        private void SimpleSave()
+        {
+            fileName = "loadingText.ser";
+            output = new FileStream(fileName, FileMode.OpenOrCreate, FileAccess.Write);
+            formatter.Serialize(output, list1); // The process of turning the record object
+                                                //(what is stored in the list)from the english like code
+                                                // into binary structure--> save record objects(type info)       
+            output.Close();
+            this.Text = "GuestBook" + "[" + fileName + "]";
+        }
+
 
         // Method for opening file
         private void OpenFile(string fileName)
@@ -387,7 +421,7 @@ namespace Project
         
                 
         // Method to create CSV from list
-        private void SearchCSVFile(string csvfileName) 
+        private void CreateCSVFile(string csvfileName) 
         {
             FileStream csvOutput = new FileStream(csvfileName, FileMode.Create, FileAccess.Write);
             StreamWriter csvfileWriter = new StreamWriter(csvOutput);
@@ -421,9 +455,10 @@ namespace Project
             fileChooser.FilterIndex = 1;
             fileChooser.RestoreDirectory = true;
             string csvfileName = "temp.csv";
-            SearchCSVFile(csvfileName);
+            CreateCSVFile(csvfileName);
         }
 
+        // ---------------------------------------------- Button click events --------------------------------------------------------
 
         // Function for the open file button
         private void btnOpenFile_Click_1(object sender, EventArgs e)
@@ -440,6 +475,7 @@ namespace Project
                 fileName = fileChooser.FileName;
                 OpenFile(fileName);
             }
+            SimpleSave();
         }
 
 
@@ -454,6 +490,7 @@ namespace Project
                 fileName = fileChooser.FileName;
                 OpenFile(fileName);
             }
+            SimpleSave();
         }
 
 
@@ -473,6 +510,7 @@ namespace Project
                 fileName = fileChooser.FileName;
                 SaveFile(fileName);
             }
+            SimpleSave();
         }
 
 
@@ -480,6 +518,7 @@ namespace Project
         private void btnSave_Click_1(object sender, EventArgs e)
         {
             SaveFile(fileName);
+            SimpleSave();
         }
 
 
@@ -498,6 +537,7 @@ namespace Project
                 string csvfileName = fileChooser.FileName;
                 SaveCSVFile(csvfileName);
             }
+            SimpleSave();
         }
 
 
@@ -620,6 +660,8 @@ namespace Project
                 }
                 else
                     list1.Add(ReadFormValues());
+                SimpleSave();
+                DisplayRecord(list1.Count-1);
             }
             catch (Exception ex)
             {
@@ -632,6 +674,7 @@ namespace Project
         private void btnUpdate_Click_1(object sender, EventArgs e)
         {
             list1[currentIndex] = ReadFormValues();
+            SimpleSave();
         }
 
 
@@ -641,6 +684,7 @@ namespace Project
             list1.RemoveAt(currentIndex);
             currentIndex++;
             DisplayRecord(currentIndex);
+            SimpleSave();
         }
 
 
@@ -649,6 +693,7 @@ namespace Project
         {
             // Calling ClearAll method to clear all fields
             ClearAll();
+            SimpleSave();
         }
 
 
@@ -703,7 +748,8 @@ namespace Project
             else if (dialogResult == DialogResult.No)
             {
                 // Empty as no actions needed
-            }  
+            }
+            SimpleSave();
         }
 
 
