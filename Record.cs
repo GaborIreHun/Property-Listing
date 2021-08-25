@@ -6,7 +6,9 @@ namespace Project
     [Serializable]
     public class Record
     {
-
+        /// <summary>
+        /// Class for records in the form
+        /// </summary>
         public string HouseNumber { get; set; }
         public string Street { get; set; }
         public string Size { get; set; }

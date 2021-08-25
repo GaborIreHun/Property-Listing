@@ -11,7 +11,9 @@ namespace Project
 {
     public partial class Form1 : Form
     {
-        // Creating list for storing records
+        /// <summary>
+        /// Creating list for storing records
+        /// </summary>
         private List<Record> list1 = new List<Record>();
         private int currentIndex = 0; // index of currently displayed record
         private BinaryFormatter formatter = new BinaryFormatter();
@@ -21,15 +23,22 @@ namespace Project
         private FileStream input;
         
         
-
+        /// <summary>
+        /// Constructor for Form1
+        /// </summary>
         public Form1()
         {
             InitializeComponent();
         }
 
-        
-        // Method for the working clock
+
+        /// <summary>
+        ///  Setting timer to null
+        /// </summary>
         System.Windows.Forms.Timer t = null;
+        /// <summary>
+        /// Method for working clock
+        /// </summary>
         private void StartTimer()   // Ready for project and tested
         {
             t = new System.Windows.Forms.Timer();
@@ -39,14 +48,23 @@ namespace Project
         }
 
 
-        // Method for the clock display
+        
+        /// <summary>
+        /// Method for the clock display
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         public void t_Tick(object sender, EventArgs e)   // Ready for project and tested
         {
             this.Text = "Property Listing   " + DateTime.Now.ToString("dddd, dd MMMM yyyy HH:mm:ss");
         }
         
                 
-        // Loading Form1
+        /// <summary>
+        /// Form1 loading method
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void Form1_Load(object sender, EventArgs e)
         {
             // Calling StartTimer method to display clock
@@ -67,7 +85,9 @@ namespace Project
         }
 
 
-        // Method for loading initial records
+        /// <summary>
+        /// Method for loading initial records
+        /// </summary>
         private void SelectLoadRecords()
         {
             // Checking if application was run before - if yes, saved values from last state shall be loaded
@@ -77,6 +97,9 @@ namespace Project
                 CreateRandomRecords();
         }
 
+        /// <summary>
+        /// Method to create random data for functionality tests
+        /// </summary>
         private void CreateRandomRecords()
         {
             // Creating new random object
@@ -218,7 +241,9 @@ namespace Project
             }
         }
 
-        // Method to clear all fields
+        /// <summary>
+        /// Method to clear all fields
+        /// </summary>
         private void ClearAll()
         {
             try
@@ -258,8 +283,11 @@ namespace Project
             }
         }
 
-        
-        // Method to display records
+
+        /// <summary>
+        /// Method to display records
+        /// </summary>
+        /// <param name="index"></param>
         private void DisplayRecord(int index)
         {
             try
@@ -291,6 +319,7 @@ namespace Project
                 //list to store setting of facilities checkboxes 
                 List<bool> checkedBoxes = list1[index].FacilitiesSettings;
 
+                // For loop to set checkboxes 
                 for (int lcv = 0; lcv < groupBox1.Controls.Count; lcv++)
                 {
                     if (groupBox1.Controls[lcv] is CheckBox)
@@ -309,7 +338,10 @@ namespace Project
         }
         
 
-        // Method for recording dataset
+        /// <summary>
+        /// Constructor for recording dataset
+        /// </summary>
+        /// <returns></returns>
         private Record ReadFormValues()
         {
             // read values from textBoxes
@@ -348,7 +380,10 @@ namespace Project
 
         //----------------------------------------- Button functionalities ----------------------------------------------------
 
-        // Method for saving file
+        /// <summary>
+        /// Method for saving file
+        /// </summary>
+        /// <param name="fileName"></param>
         private void SaveFile(String fileName)
         {
             // Checking if file name is given, if yes save file
@@ -365,6 +400,9 @@ namespace Project
             }
         }
 
+        /// <summary>
+        /// Method for saving status of dataset in temporary file
+        /// </summary>
         private void SimpleSave()
         {
             fileName = "loadingText.ser";
@@ -377,7 +415,10 @@ namespace Project
         }
 
 
-        // Method for opening file
+        /// <summary>
+        /// Method for opening file
+        /// </summary>
+        /// <param name="fileName"></param>
         private void OpenFile(string fileName)
         {
             input = new FileStream(fileName, FileMode.Open, FileAccess.Read);
@@ -392,7 +433,10 @@ namespace Project
         }
 
 
-        // Method for saving file as CSV
+        /// <summary>
+        /// Method for saving file as CSV
+        /// </summary>
+        /// <param name="csvfileName"></param>
         private void SaveCSVFile(string csvfileName)
         {
             // Checking if file name is given, before saving to CSV
@@ -418,9 +462,12 @@ namespace Project
                 csvfileWriter.Close();
             }
         }
-        
-                
-        // Method to create CSV from list
+
+
+        /// <summary>
+        /// Method to create CSV from list
+        /// </summary>
+        /// <param name="csvfileName"></param>
         private void CreateCSVFile(string csvfileName) 
         {
             FileStream csvOutput = new FileStream(csvfileName, FileMode.Create, FileAccess.Write);
@@ -446,7 +493,9 @@ namespace Project
         }
 
 
-        // Method to create temporary CSV file from list for form2
+        /// <summary>
+        /// Method to create temporary CSV file from list for form2
+        /// </summary>
         private void CreateCSV()
         {
             SaveFileDialog fileChooser = new SaveFileDialog();
@@ -460,7 +509,11 @@ namespace Project
 
         // ---------------------------------------------- Button click events --------------------------------------------------------
 
-        // Function for the open file button
+        /// <summary>
+        /// Method for the open file button
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void btnOpenFile_Click_1(object sender, EventArgs e)
         {
             OpenFileDialog fileChooser = new OpenFileDialog();
@@ -479,7 +532,11 @@ namespace Project
         }
 
 
-        // Function for the close file button
+        /// <summary>
+        /// Function for the close file button
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void btnCloseFile_Click_1(object sender, EventArgs e)
         {
             OpenFileDialog fileChooser = new OpenFileDialog();
@@ -494,7 +551,11 @@ namespace Project
         }
 
 
-        // Function for the save as button
+        /// <summary>
+        /// Method for the save as button
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void btnSaveAs_Click_1(object sender, EventArgs e)
         {
             SaveFileDialog fileChooser = new SaveFileDialog();
@@ -514,7 +575,11 @@ namespace Project
         }
 
 
-        // Function for the save button
+        /// <summary>
+        /// Method for the save button
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void btnSave_Click_1(object sender, EventArgs e)
         {
             SaveFile(fileName);
@@ -522,7 +587,11 @@ namespace Project
         }
 
 
-        // Function for the save as CSV button
+        /// <summary>
+        /// Method for the save as CSV button
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void btnSaveAsCsv_Click_1(object sender, EventArgs e)
         {
             SaveFileDialog fileChooser = new SaveFileDialog();
@@ -541,7 +610,11 @@ namespace Project
         }
 
 
-        // Function for first button
+        /// <summary>
+        /// Method for first button
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void btnFirst_Click_1(object sender, EventArgs e)
         {
             try
@@ -560,7 +633,11 @@ namespace Project
         }
 
 
-        // Function for previous button
+        /// <summary>
+        /// Method for previous button
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void btnPrevious_Click_1(object sender, EventArgs e)
         {
             try
@@ -579,7 +656,11 @@ namespace Project
         }
 
 
-        // Function for next button
+        /// <summary>
+        /// Method for next button
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void btnNext_Click_1(object sender, EventArgs e)
         {
             try
@@ -598,7 +679,11 @@ namespace Project
         }
 
 
-        // Function for last button
+        /// <summary>
+        /// Method for last button
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void btnLast_Click_1(object sender, EventArgs e)
         {
             try
@@ -617,7 +702,11 @@ namespace Project
         }
 
 
-        // Function for add button
+        /// <summary>
+        /// Method for add button
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void btnAdd_Click_1(object sender, EventArgs e)
         {
             try
@@ -670,7 +759,11 @@ namespace Project
         }
 
 
-        // Function for update button
+        /// <summary>
+        /// Method for update button
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void btnUpdate_Click_1(object sender, EventArgs e)
         {
             list1[currentIndex] = ReadFormValues();
@@ -678,7 +771,11 @@ namespace Project
         }
 
 
-        // Function for delete button
+        /// <summary>
+        /// Method for delete button
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void btnDelete_Click_1(object sender, EventArgs e)
         {
             list1.RemoveAt(currentIndex);
@@ -687,8 +784,12 @@ namespace Project
             SimpleSave();
         }
 
-
-        // Function for clear button 
+ 
+        /// <summary>
+        /// Method for clear button
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void btnClearAll_Click_1(object sender, EventArgs e)
         {
             // Calling ClearAll method to clear all fields
@@ -697,7 +798,11 @@ namespace Project
         }
 
 
-        // Function when search button is pressed
+        /// <summary>
+        /// Method when search button is pressed
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void btnSearch_Click(object sender, EventArgs e)
         {
             // Creating temporary CSV for the source of dataGridView1 on Form2
@@ -710,7 +815,11 @@ namespace Project
         }
 
 
-        // Function for cancel button
+        /// <summary>
+        /// Method for cancel button
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void btnCancel_Click(object sender, EventArgs e)
         {
             if (list1.Count == 0)
@@ -720,7 +829,11 @@ namespace Project
         }
 
 
-        // Functions for exit button to close the application
+        /// <summary>
+        /// Method for exit button to close the application
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void btnExit_Click(object sender, EventArgs e)
         {
             if (System.Windows.Forms.Application.MessageLoop)
@@ -736,7 +849,11 @@ namespace Project
         }
 
 
-        // Creating function for button that clears all records(list1)
+        /// <summary>
+        /// Creating method for button that clears all records(list1)
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void btnClearRecord_Click(object sender, EventArgs e)
         {
             DialogResult dialogResult = MessageBox.Show("Are you sure?", "You will delete all records!", MessageBoxButtons.YesNo);
@@ -753,191 +870,300 @@ namespace Project
         }
 
 
-        // ---------------------------------------- Functions for toolTip1 -----------------------------------------------------------
+        // ---------------------------------------- Methods for toolTip1 -----------------------------------------------------------
 
-        // Show guiding text for House Number
+     
+        /// <summary>
+        /// Method to Show guiding text for House Number
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void txtHouseNumber_MouseHover(object sender, EventArgs e)
         {
             toolTip1.Show("Enter the House number", txtHouseNumber);
         }
 
 
-        // Show guiding text for Street name
+        /// <summary>
+        /// Method to Show guiding text for Street name
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void txtStreet_MouseHover(object sender, EventArgs e)
         {
             toolTip1.Show("Enter the name of the Street", txtHouseNumber);
         }
 
 
-        // Show guiding text for Area
+        /// <summary>
+        /// Method to Show guiding text for Area
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void comboBoxArea_MouseHover(object sender, EventArgs e)
         {
             toolTip1.Show("Choose the property's Area", comboBoxArea);
         }
 
 
-        // Show guiding text for District
+        /// <summary>
+        /// Method to Show guiding text for District
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void comboBoxDistrict_MouseHover(object sender, EventArgs e)
         {
             toolTip1.Show("Choose the property's District", comboBoxDistrict);
         }
 
 
-        // Show guiding text for House Type
+        /// <summary>
+        /// Method to Show guiding text for House Type
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void comboBoxType_MouseHover(object sender, EventArgs e)
         {
             toolTip1.Show("Choose the property's Type", comboBoxType);
         }
 
 
-        // Show guiding text for Heating
+        /// <summary>
+        /// Method to Show guiding text for Heating
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void comboBoxHeating_MouseHover(object sender, EventArgs e)
         {
             toolTip1.Show("Choose the property's Heating", comboBoxHeating);
         }
 
 
-        // Show guiding text for Room
+        /// <summary>
+        /// Method to Show guiding text for Room
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void comboBoxRoom_MouseHover(object sender, EventArgs e)
         {
             toolTip1.Show("Choose the number of Rooms", comboBoxRoom);
         }
 
 
-        // Show guiding text for Ber
+        /// <summary>
+        /// Method to Show guiding text for Ber
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void comboBoxBer_MouseHover(object sender, EventArgs e)
         {
             toolTip1.Show("Choose the property's Ber rating", comboBoxBer);
         }
 
 
-        // Show guiding text for Facilities
+        /// <summary>
+        /// Method to Show guiding text for Facilities
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void groupBox1_MouseHover(object sender, EventArgs e)
         {
             toolTip1.Show("Select the property's Facilities", groupBox1);
         }
 
 
-        // Show guiding text for Size
+        /// <summary>
+        /// Method to Show guiding text for Size
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void txtSize_MouseHover(object sender, EventArgs e)
         {
             toolTip1.Show("Enter the Size of the property", txtSize);
         }
 
 
-        // Show guiding text for Price
+        /// <summary>
+        /// Method to Show guiding text for Price
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void txtPrice_MouseHover(object sender, EventArgs e)
         {
             toolTip1.Show("Enter the Price of the property", txtPrice);
         }
 
 
-        // Show guiding text for Add button
+        /// <summary>
+        /// Method to Show guiding text for Add button
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void btnAdd_MouseHover(object sender, EventArgs e)
         {
             toolTip1.Show("Add new record", btnAdd);
         }
 
 
-        // Show guiding text for Update button
+        /// <summary>
+        /// Method to Show guiding text for Update button
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void btnUpdate_MouseHover(object sender, EventArgs e)
         {
             toolTip1.Show("Update edited record", btnUpdate);
         }
 
 
-        // Show guiding text for Delete button
+        /// <summary>
+        /// Method to Show guiding text for Delete button
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void btnDelete_MouseHover(object sender, EventArgs e)
         {
             toolTip1.Show("Delete current record", btnDelete);
         }
 
 
-        // Show guiding text for Clear Records button
+        /// <summary>
+        /// Show guiding text for Clear Records button
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void btnClearRecord_MouseHover(object sender, EventArgs e)
         {
             toolTip1.Show("Clear all records", btnClearRecords);
         }
 
-
-        // Show guiding text for Search button
+ 
+        /// <summary>
+        /// Method to Show guiding text for Search button
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void btnSearch_MouseHover(object sender, EventArgs e)
         {
             toolTip1.Show("Search Records", btnSearch);
         }
 
 
-        // Show guiding text for Clear button
+        /// <summary>
+        /// Method to Show guiding text for Clear button
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void btnClear_MouseHover(object sender, EventArgs e)
         {
             toolTip1.Show("Clear current record", btnClear);
         }
 
 
-        // Show guiding text for Cancel button
+        /// <summary>
+        /// Method to Show guiding text for Cancel button
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void btnCancel_MouseHover(object sender, EventArgs e)
         {
             toolTip1.Show("Cancel modifications on current record", btnCancel);
         }
 
 
-        // Show guiding text for Exit button
+        /// <summary>
+        /// Method to Show guiding text for Exit button
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void btnExit_MouseHover(object sender, EventArgs e)
         {
             toolTip1.Show("Exit application", btnExit);
         }
 
 
-        // Show guiding text for First button
+        /// <summary>
+        /// Method to Show guiding text for First button
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void btnFirst_MouseHover(object sender, EventArgs e)
         {
             toolTip1.Show("First record", btnFirst);
         }
 
 
-        // Show guiding text for Previous button
+        /// <summary>
+        /// Method to Show guiding text for Previous button
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void btnPrevious_MouseHover(object sender, EventArgs e)
         {
             toolTip1.Show("Previous record", btnPrevious);
         }
 
-
-        // Show guiding text for Index button
+ 
+        /// <summary>
+        /// Method to Show guiding text for Index button
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void txtIndex_MouseHover(object sender, EventArgs e)
         {
             toolTip1.Show("Current index", txtIndex);
         }
 
 
-        // Show guiding text for Next button
+        /// <summary>
+        /// Method to Show guiding text for Next button
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void btnNext_MouseHover(object sender, EventArgs e)
         {
             toolTip1.Show("Next record", btnNext);
         }
 
 
-        // Show guiding text for Last button
+        /// <summary>
+        /// Method to Show guiding text for Last button
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void btnLast_MouseHover(object sender, EventArgs e)
         {
             toolTip1.Show("Last record", btnLast);
         }
 
 
-        // Radio button to activate toolTip1
+        /// <summary>
+        /// Radio button to activate toolTip1
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void radioButton1_CheckedChanged(object sender, EventArgs e)
         {
             toolTip1.Active = true;
         }
 
 
-        // Radio button to deactivate toolTip1
+        /// <summary>
+        /// Method to Radio button to deactivate toolTip1
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void radioButton2_CheckedChanged(object sender, EventArgs e)
         {
             toolTip1.Active = false;
         }
 
 
-        // Function for help button
+        /// <summary>
+        /// Method for help button
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void btnHelp_Click(object sender, EventArgs e)
         {
             System.Diagnostics.Process.Start(@"Property Listing Documentation.html");

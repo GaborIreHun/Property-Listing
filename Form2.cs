@@ -10,14 +10,20 @@ namespace Project
         // Creating datatable for the source of datagridview
         public DataTable dt2 = new DataTable();
 
-
+        /// <summary>
+        /// Constructor for Form2
+        /// </summary>
         public Form2()
         {
             InitializeComponent();
         }
 
 
-        // Initiating tasks when loading form2
+        /// <summary>
+        /// Method for task when loading Form2
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void Form2_Load(object sender, EventArgs e)
         {
             // Calling method to convert CSV created on form1 to datatable for datagridview
@@ -36,7 +42,10 @@ namespace Project
         }
 
 
-        // Method to convert CSV to datatable
+        /// <summary>
+        /// Method to convert CSV to datatable
+        /// </summary>
+        /// <param name="filePath"></param>
         private void BindData(string filePath)
         {
             try
@@ -83,7 +92,11 @@ namespace Project
         }
 
 
-        // Creating function for back button
+        /// <summary>
+        /// Method for back button
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void btnBack_Click(object sender, EventArgs e)
         {
             // Hiding current form and opening form1
@@ -93,7 +106,11 @@ namespace Project
         }
 
 
-        // Creating function for clicking on map button
+        /// <summary>
+        /// Method for map button
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void btnMap_Click(object sender, EventArgs e)
         {
             try
@@ -112,7 +129,12 @@ namespace Project
             }
         }
 
-        // Creating function for clicking on picturebox
+ 
+        /// <summary>
+        /// Method for picturebox
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void pictureBox1_Click(object sender, EventArgs e)
         {
             // Hiding picturebox
@@ -120,7 +142,11 @@ namespace Project
         }
 
 
-        // Search button functionalities
+        /// <summary>
+        /// Method for search button
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void btnSearching_Click(object sender, EventArgs e)
         {
             // Creating variables for each search area values
@@ -193,7 +219,12 @@ namespace Project
             }
         }
 
-        // List refresh button function
+
+        /// <summary>
+        /// Method for refresh button
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void btnRefresh_Click(object sender, EventArgs e)
         {
             // Setting dt2 datatable to the source of the datagridview
@@ -201,7 +232,11 @@ namespace Project
         }
 
 
-        // Clear criteria button functions
+        /// <summary>
+        /// Method for clear all button
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void btnClearAll_Click(object sender, EventArgs e)
         {
             try
@@ -252,160 +287,289 @@ namespace Project
             }
         }
 
-        // ------------------------------------------- Functions for toolTip1 --------------------------------------------------------
+        // ------------------------------------------- Methods for toolTip1 --------------------------------------------------------
 
-        // Radio button to activate toolTip1
+     
+        /// <summary>
+        /// Radio button method to activate toolTip1
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void radioButtonOn_CheckedChanged(object sender, EventArgs e)
         {
             toolTip1.Active = true;
         }
 
-        // Radio button to deactivate toolTip1
+ 
+        /// <summary>
+        /// Radio button method to deactivate toolTip1
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void radioButtonOff_CheckedChanged(object sender, EventArgs e)
         {
             toolTip1.Active = false;
         }
 
-        // Show guiding text for Area
+       
+        /// <summary>
+        /// Method to Show guiding text for Area
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void comboBoxArea1_MouseHover(object sender, EventArgs e)
         {
             toolTip1.Show("Choose the property's Area", comboBoxArea1);
         }
 
-        // Show guiding text for District
+        
+        /// <summary>
+        /// Method to Show guiding text for District
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void comboBoxDistrict1_MouseHover(object sender, EventArgs e)
         {
             toolTip1.Show("Choose the property's District", comboBoxDistrict1);
         }
 
-        // Show guiding text for Type
+        
+        /// <summary>
+        /// Method to Show guiding text for Type 
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void comboBoxType1_MouseHover(object sender, EventArgs e)
         {
             toolTip1.Show("Choose the property's Type", comboBoxType1);
         }
 
-        // Show guiding text for Heating
+        
+        /// <summary>
+        /// Method to Show guiding text for Heating
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void comboBoxHeating1_MouseHover(object sender, EventArgs e)
         {
             toolTip1.Show("Choose the property's Heating", comboBoxHeating1);
         }
 
-        // Show guiding text for Room
+       
+        /// <summary>
+        /// Method to Show guiding text for Room
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void comboBoxRoom1_MouseHover(object sender, EventArgs e)
         {
             toolTip1.Show("Choose the number of Rooms", comboBoxRoom1);
         }
 
-        // Show guiding text for BER
+        
+        /// <summary>
+        /// Method to Show guiding text for BER
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void comboBoxBer1_MouseHover(object sender, EventArgs e)
         {
             toolTip1.Show("Choose the property's Ber rating", comboBoxBer1);
         }
 
-        // Show guiding text for Minimum Size
+        
+        /// <summary>
+        /// Method to Show guiding text for Minimum Size
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void comboBoxMin_MouseHover(object sender, EventArgs e)
         {
             toolTip1.Show("Choose the Minimum Size", comboBoxMin);
         }
 
-        // Show guiding text for Maximum Size
+        
+        /// <summary>
+        /// Method to Show guiding text for Maximum Size
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void comboBoxMax_MouseHover(object sender, EventArgs e)
         {
             toolTip1.Show("Choose the Maximum Size", comboBoxMax);
         }
 
-        // Show guiding text for Minimum Price
+        
+        /// <summary>
+        /// Method to Show guiding text for Minimum Price
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void comboBoxMin1_MouseHover(object sender, EventArgs e)
         {
             toolTip1.Show("Choose the Minimum Price", comboBoxMin1);
         }
 
-        // Show guiding text for Maximum Price
+        
+        /// <summary>
+        /// Method to Show guiding text for Maximum Price
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void comboBoxMax1_MouseHover(object sender, EventArgs e)
         {
             toolTip1.Show("Choose the Maximum Price", comboBoxMax1);
         }
 
-        // Show guiding text for Map button
+        
+        /// <summary>
+        /// Method to Show guiding text for Map button
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void btnMap_MouseHover(object sender, EventArgs e)
         {
             toolTip1.Show("Show map", btnMap);
         }
 
-        // Show guiding text for Parking
+         
+        /// <summary>
+        /// Method to Show guiding text for Parking
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void comboBoxParking_MouseHover(object sender, EventArgs e)
         {
             toolTip1.Show("Choose Parking preference", comboBoxParking);
         }
 
-        // Show guiding text for Alarm
+         
+        /// <summary>
+        /// Method to Show guiding text for Alarm
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void comboBoxAlarm_MouseHover(object sender, EventArgs e)
         {
             toolTip1.Show("Choose Alarm preference", comboBoxAlarm);
         }
 
-        // Show guiding text for Aircondition
+        
+        /// <summary>
+        /// Method to Show guiding text for Aircondition
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void comboBoxAircondition_MouseHover(object sender, EventArgs e)
         {
             toolTip1.Show("Choose Aircondition preference", comboBoxAircondition);
         }
 
-        // Show guiding text for Proximity Area
+        
+        /// <summary>
+        /// Method to Show guiding text for Proximity Area
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void comboBoxProximity_MouseHover(object sender, EventArgs e)
         {
             toolTip1.Show("Choose Proximity Area preference", comboBoxProximity);
         }
 
-        // Show guiding text for Clear Criteria
+        
+        /// <summary>
+        /// Method to Show guiding text for Clear Criteria
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void btnClearAll_MouseHover(object sender, EventArgs e)
         {
             toolTip1.Show("Clear all fields", btnClearAll);
         }
 
-        // Show guiding text for Back button
+        
+        /// <summary>
+        /// Method to Show guiding text for Back button
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void btnBack1_MouseHover(object sender, EventArgs e)
         {
             toolTip1.Show("Go back to the first page", btnBack1);
         }
 
-        // Show guiding text for Garden
+        
+        /// <summary>
+        /// Method to Show guiding text for Garden
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void comboBoxGarden_MouseHover(object sender, EventArgs e)
         {
             toolTip1.Show("Choose Garden preference", comboBoxGarden);
         }
 
-        // Show guiding text for Broadband
+        
+        /// <summary>
+        /// Method to Show guiding text for Broadband
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void comboBoxBroadband_MouseHover(object sender, EventArgs e)
         {
             toolTip1.Show("Choose Broadband preference", comboBoxBroadband);
         }
 
-        // Show guiding text for Solar Panel
+         
+        /// <summary>
+        /// Method to Show guiding text for Solar Panel
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void comboBoxSolarPanel_MouseHover(object sender, EventArgs e)
         {
             toolTip1.Show("Choose Solar Panel preference", comboBoxSolarPanel);
         }
 
-        // Show guiding text for Wheelchair Access
+        
+        /// <summary>
+        /// Method to Show guiding text for Wheelchair Access
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void comboBoxWheelchair_MouseHover(object sender, EventArgs e)
         {
             toolTip1.Show("Choose Wheelchair Access preference", comboBoxWheelchair);
         }
 
-        // Show guiding text for Refresh button
+        
+        /// <summary>
+        /// Method to Show guiding text for Refresh button
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void btnRefresh_MouseHover(object sender, EventArgs e)
         {
             toolTip1.Show("Refresh List", btnRefresh);
         }
 
-        // Show guiding text for Search button
+        
+        /// <summary>
+        /// Method to Show guiding text for Search button
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void btnSearching_MouseHover(object sender, EventArgs e)
         {
             toolTip1.Show("Search Collection", btnSearching);
         }
 
 
-        // Function for help button
+        /// <summary>
+        /// Method for help button
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void btnHelp_Click(object sender, EventArgs e)
         {
             System.Diagnostics.Process.Start(@"Property Listing Documentation.html");
